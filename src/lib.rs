@@ -49,7 +49,11 @@ impl KvStore {
 
         match value {
             None => None,
-            Some(val) => Some(String::from(val)), // not sure if this is right
+            // TODO Creating a new String from val is a hack to get a "Some" response
+            // with the val param as a String type. The val parameter is a reference to a String and
+            // dereferencing it (Some(*val)) doesn't work (compilation error "cannot move out of `*val`
+            // which is behind a shared reference").
+            Some(val) =>  Some(String::from(val)),
         }
     }
 
